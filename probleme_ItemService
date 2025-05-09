@@ -1,0 +1,14 @@
+1.Thread Safety
+    processedItems (ArrayList) și processedCount (int) erau shared state nesincronizat -> risc de race conditions.
+
+2.Gestionare de erori deficitară
+    Prindea InterruptedException dar nu propaga eroarea -> pierdere de context.
+    Nu raporta care itemi au eșuat.
+
+3.Execuție async defectuoasă ️
+    Returna lista înainte de finalizarea thread-urilor -> rezultate incomplete.
+    Nu folosea corect @Async (returna List în loc de CompletableFuture).
+
+4.Resurse irosite
+    ExecutorService static cu thread pool fix (10) -> neadaptabil la sarcina.
+    Nu se închidea niciodată -> memory leak.
